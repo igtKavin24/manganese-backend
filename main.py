@@ -76,8 +76,6 @@ class ShortfallRequest(BaseModel):
     temperature: float
     truck_count: int = Field(..., ge=0)
     haulage_delay: float = Field(..., ge=0)
-    previous_day_production: float = Field(..., ge=0)
-    previous_7day_average: float = Field(..., ge=0)
     target_production: float = Field(..., gt=0)
 
 # ---------------------------------------------------------------------------
