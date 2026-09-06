@@ -163,6 +163,13 @@ def predict_reserve(req: ReserveRequest):
         "grid_distance_degrees": round(distance_deg, 4),
     }
 
+@app.get("/reserve_grid")
+def reserve_grid():
+    """Returns the full precomputed reserve probability grid for map rendering."""
+    if reserve_cache is None:
+        raise HTTPException(status_code=503, detail="Reserve cache not loaded on server.")
+    return reserve_cache.to_dict(orient="records")
+
 @app.post("/predict_shortfall")
 def predict_shortfall(req: ShortfallRequest):
     if production_model is None or prod_feature_cols is None:
